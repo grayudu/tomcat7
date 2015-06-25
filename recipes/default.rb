@@ -13,14 +13,13 @@ remote_file "/tmp/apache-tomcat-7.0.62.zip" do
 end
 
 execute 'unzip' do
-  command 'sudo unzip /tmp/apache-tomcat-7.0.62.zip -d /usr/local/'
-  command 'sudo sh /usr/local/apache-tomcat-7.0.62/bin/catalina.sh restart'
+  command 'unzip /tmp/apache-tomcat-7.0.62.zip -d /usr/local/'
   not_if 'ls -ld /usr/local/apache-tomcat-7.0.62'
   action :run
 end
 
 execute "Tomcat Start" do
-  command 'sudo sh /usr/local/apache-tomcat-7.0.62/bin/catalina.sh start'
+  command 'sh /usr/local/apache-tomcat-7.0.62/bin/catalina.sh start'
   not_if 'ps -ef|grep tomcat|grep -v grep'
   action :run
 end

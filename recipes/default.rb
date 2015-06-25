@@ -18,6 +18,35 @@ execute 'unzip' do
   action :run
 end
 
+%w{host-manager manager examples docs}.each do |dir|
+  directory "/usr/local/apache-tomcat-7.0.62/webapps/#{dir}" do
+    action :delete
+    recursive true
+  end
+end
+
+cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/index.jsp" do
+  source "index.html"
+  owner "appadmin"
+  group "app"
+  mode "0664"
+end
+
+cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/ctodevlogo_trans.png" do
+  source "ctodevlogo_trans.png"
+  owner "appadmin"
+  group "app"
+  mode "0664"
+end
+
+cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/favicon.ico" do
+  source "favicon.ico"
+  owner "appadmin"
+  group "app"
+  mode "0664"
+end
+
+
 execute "Tomcat Start" do
   command 'sh /usr/local/apache-tomcat-7.0.62/bin/catalina.sh start'
   not_if 'ps -ef|grep tomcat|grep -v grep'

@@ -19,27 +19,27 @@ execute 'unzip' do
 end
 
 %w{host-manager manager examples docs}.each do |dir|
-  directory "/usr/local/apache-tomcat-7.0.62/webroots/#{dir}" do
+  directory "/usr/local/apache-tomcat-7.0.62/webapps/#{dir}" do
     action :delete
     recursive true
   end
 end
 
-cookbook_file "/usr/local/apache-tomcat-7.0.62/webroots/ROOT/index.jsp" do
+cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/index.jsp" do
   source "index.html"
   owner "root"
   group "root"
   mode "0664"
 end
 
-cookbook_file "/usr/local/apache-tomcat-7.0.62/webroots/ROOT/ctodevlogo_trans.png" do
+cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/ctodevlogo_trans.png" do
   source "ctodevlogo_trans.png"
   owner "root"
   group "root"
   mode "0664"
 end
 
-cookbook_file "/usr/local/apache-tomcat-7.0.62/webroots/ROOT/favicon.ico" do
+cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/favicon.ico" do
   source "favicon.ico"
   owner "root"
   group "root"

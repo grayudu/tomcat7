@@ -13,8 +13,8 @@ remote_file "/tmp/apache-tomcat-7.0.62.zip" do
 end
 
 execute 'unzip' do
-  command 'unzip /tmp/apache-tomcat-7.0.62.zip -d /usr/local/'
-  command '/usr/local/apache-tomcat-7.0.62/bin/catalina.sh restart'
+  command 'sudo unzip /tmp/apache-tomcat-7.0.62.zip -d /usr/local/'
+  command 'sudo sh /usr/local/apache-tomcat-7.0.62/bin/catalina.sh restart'
   not_if 'ls -ld /usr/local/apache-tomcat-7.0.62'
   action :run
 end

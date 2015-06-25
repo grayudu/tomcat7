@@ -14,19 +14,14 @@ end
 
 execute 'unzip' do
   command 'unzip /tmp/apache-tomcat-7.0.62.zip -d /usr/local/'
+  command '/usr/local/apache-tomcat-7.0.62/bin/catalina.sh restart'
   not_if 'ls -ld /usr/local/apache-tomcat-7.0.62'
   action :run
-  notifies :run, "execute[tomcat_start]", :immediately
 end
 
-execute 'tomcat_stop' do
-  command '/usr/local/apache-tomcat-7.0.62/bin/catalina.sh stop'
-  only_if 'ps -ef|grep tomcat|grep -v grep'
-  action :nothing
-end
-
-execute 'tomcat_start' do
-  command '/usr/local/apache-tomcat-7.0.62/bin/catalina.sh start'
+execute "Tomcat Start" do
+  command 'sudo sh /usr/local/apache-tomcat-7.0.62/bin/catalina.sh start'
   not_if 'ps -ef|grep tomcat|grep -v grep'
-  action :nothing
+  action :run
 end
+

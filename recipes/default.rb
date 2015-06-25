@@ -46,10 +46,16 @@ cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/favicon.ico" do
   mode "0664"
 end
 
+cookbook_file "/usr/local/apache-tomcat-7.0.62/webapps/ROOT/health.html" do
+  mode "0755"
+  source "health.html"
+end
+
 
 execute "Tomcat Start" do
   command 'sh /usr/local/apache-tomcat-7.0.62/bin/catalina.sh start'
   not_if 'ps -ef|grep tomcat|grep -v grep'
   action :run
 end
+
 
